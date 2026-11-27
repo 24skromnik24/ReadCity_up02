@@ -1,0 +1,104 @@
+﻿<Window x:Class="ReadCity.ProductEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReadCity"
+        mc:Ignorable="d"
+        Title="ООО «ЧитайГород» — Товар"
+        Icon="/Resourсes/icon.ico"
+        Height="680" Width="620"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,0">
+                <!-- ID товара (скрыт при добавлении, только чтение при редактировании) -->
+                <StackPanel x:Name="IdPanel" Margin="0,0,0,10" Visibility="Collapsed">
+                    <TextBlock Text="ID товара:" FontWeight="Bold"/>
+                    <TextBox x:Name="IdTextBox" IsReadOnly="True" Background="#EEEEEE" Height="30"/>
+                </StackPanel>
+
+                <!-- Блок фото (300x200) -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <Border BorderBrush="#546F94" BorderThickness="1.5" Width="180" Height="120" Background="White">
+                        <Image x:Name="PreviewImage" Stretch="Uniform"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center" Margin="15,0,0,0">
+                        <Button Content="Выбрать фото (300×200)" Click="SelectPhotoButton_Click" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="PhotoNameTextBlock" Text="Фото не выбрано" FontSize="12" Foreground="Gray"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock Text="Артикул *" FontWeight="Bold"/>
+                <TextBox x:Name="ArticleTextBox" Height="30" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Наименование товара *" FontWeight="Bold"/>
+                <TextBox x:Name="NameTextBox" Height="30" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Категория товара *" FontWeight="Bold"/>
+                <ComboBox x:Name="CategoryComboBox" DisplayMemberPath="Name" SelectedValuePath="Id"
+                          Height="30" FontFamily="Comic Sans MS" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Поставщик (автор) *" FontWeight="Bold"/>
+                <ComboBox x:Name="SupplierComboBox" DisplayMemberPath="Name" SelectedValuePath="Id"
+                          Height="30" FontFamily="Comic Sans MS" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Производитель (издательство) *" FontWeight="Bold"/>
+                <TextBox x:Name="ManufacturerTextBox" Height="30" Margin="0,0,0,8"/>
+
+                <Grid Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Цена (руб.) *" FontWeight="Bold"/>
+                        <TextBox x:Name="PriceTextBox" Height="30"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Единица измерения *" FontWeight="Bold"/>
+                        <TextBox x:Name="UnitTextBox" Text="шт." Height="30"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Количество на складе *" FontWeight="Bold"/>
+                        <TextBox x:Name="StockTextBox" Height="30"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Действующая скидка (%)" FontWeight="Bold"/>
+                        <TextBox x:Name="DiscountTextBox" Text="0" Height="30"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Описание товара:" FontWeight="Bold"/>
+                <TextBox x:Name="DescriptionTextBox" Height="65" TextWrapping="Wrap"
+                         AcceptsReturn="True" VerticalContentAlignment="Top" Margin="0,0,0,10"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Кнопки Сохранить, Удалить и Отмена -->
+        <Grid Grid.Row="1" Margin="0,12,0,0">
+            <Button x:Name="DeleteButton" Content="Удалить товар" Background="#C0392B"
+                    HorizontalAlignment="Left" Visibility="Collapsed" Click="DeleteButton_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Сохранить" FontWeight="Bold" Click="SaveButton_Click" Margin="0,0,10,0"/>
+                <Button Content="Отмена" Background="{StaticResource SecondaryBgBrush}" Foreground="Black"
+                        Click="CancelButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
